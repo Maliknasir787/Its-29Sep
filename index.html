@@ -236,20 +236,59 @@ footer{text-align:center;margin:30px 0;opacity:.8;font-size:.9rem;}
 .gradient-8{background:linear-gradient(90deg,#ffd166,#00f0ff);}
 .gradient-9{background:linear-gradient(90deg,#ff00ff,#ff2d95);}
 .gradient-10{background:linear-gradient(90deg,#00ff85,#ffd166);}
-/* repeat filler gradients */
-.gradient-11{background:linear-gradient(90deg,#ff2d95,#00f0ff);}
-.gradient-12{background:linear-gradient(90deg,#ffd166,#ff00ff);}
-.gradient-13{background:linear-gradient(90deg,#00ff85,#00f0ff);}
-.gradient-14{background:linear-gradient(90deg,#ff6b81,#ffd166);}
-.gradient-15{background:linear-gradient(90deg,#ff2d95,#ffd166);}
-.gradient-16{background:linear-gradient(90deg,#00f0ff,#ff00ff);}
-.gradient-17{background:linear-gradient(90deg,#ff6b81,#00ff85);}
-.gradient-18{background:linear-gradient(90deg,#ffd166,#00f0ff);}
-.gradient-19{background:linear-gradient(90deg,#ff00ff,#ff2d95);}
-.gradient-20{background:linear-gradient(90deg,#00ff85,#ffd166);}
-/* ... continue filler up to gradient-200 to pad CSS length ... */
+/* repeat filler gradients up to gradient-200... */
 
-/* === END CSS === */
+/* === POPUP SURPRISE EXTRA STYLES === */
+#popupModal{
+  display:none;
+  position:fixed;
+  top:0;left:0;width:100%;height:100%;
+  background:rgba(0,0,0,0.7);
+  backdrop-filter:blur(6px);
+  z-index:2000;
+  align-items:center;
+  justify-content:center;
+  animation:fadeIn 0.5s;
+}
+#popupModal .content{
+  background:linear-gradient(135deg,var(--neon-1),var(--neon-2));
+  color:white;
+  padding:30px;
+  border-radius:var(--radius-lg);
+  max-width:500px;
+  text-align:center;
+  box-shadow:0 0 30px var(--neon-2),0 0 50px var(--neon-3);
+  animation:popIn 0.6s ease-out;
+}
+#popupModal h2{
+  font-size:2rem;
+  margin-bottom:15px;
+  text-shadow:0 0 15px var(--neon-4);
+}
+#popupModal p{
+  font-size:1.1rem;
+  line-height:1.5;
+}
+#popupModal button{
+  margin-top:20px;
+  padding:10px 20px;
+  border:none;
+  border-radius:var(--radius-md);
+  background:var(--neon-4);
+  color:#000;
+  font-weight:600;
+  cursor:pointer;
+  transition:.3s;
+}
+#popupModal button:hover{transform:scale(1.05);}
+@keyframes popIn{
+  0%{transform:scale(0.5);opacity:0;}
+  100%{transform:scale(1);opacity:1;}
+}
+@keyframes fadeIn{
+  from{opacity:0;}
+  to{opacity:1;}
+}
 </style>
 </head>
 <body>
@@ -262,6 +301,7 @@ footer{text-align:center;margin:30px 0;opacity:.8;font-size:.9rem;}
     <div>
       <button class="btn primary" id="wishBtn">Make a wish</button>
       <button class="btn neon" id="musicBtn">Play music</button>
+      <button class="btn primary" id="surpriseBtn">🎁 Surprise</button>
     </div>
     <div class="carousel" id="carousel">
       <img src="IMG1.jpg" class="active">
@@ -280,6 +320,15 @@ footer{text-align:center;margin:30px 0;opacity:.8;font-size:.9rem;}
   <source src="hacker.mp3" type="audio/mpeg">
   Your browser does not support the audio element.
 </audio>
+
+<!-- === POPUP MODAL === -->
+<div id="popupModal">
+  <div class="content">
+    <h2>🎉 Congrats we're no more together 🎉</h2>
+    <p>Looks like congratulations are in order — wishing you happiness with your new boyfriend, and a very happy birthday too! 💖🥳✨</p>
+    <button onclick="closePopup()">Close</button>
+  </div>
+</div>
 
 <footer>Made with 💖 for Atifa — 29 Sept</footer>
 <script>
@@ -351,6 +400,15 @@ function createBalloon(){
  setTimeout(()=>div.remove(),12000);
 }
 setInterval(createBalloon,2000);
+
+/* === Surprise Popup === */
+const surpriseBtn=document.getElementById("surpriseBtn");
+const popupModal=document.getElementById("popupModal");
+surpriseBtn.addEventListener("click",()=>{
+  popupModal.style.display="flex";
+});
+function closePopup(){
+  popupModal.style.display="none";
+}
 </script>
 </body>
-</html>
